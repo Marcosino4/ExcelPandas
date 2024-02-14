@@ -11,15 +11,15 @@ def load_employees_data(file_path):
 def filter_employees(employees_data, project_name):
     valid_employees = []
     for employee in employees_data:
-        if employee['proyect'] == project_name:
+        if employee['proyect'] != project_name:
             valid_employees.append(employee)
     return valid_employees
 
 def process_employees_salaries(employees):
     for employee in employees:
-        employee['salary'] = f"{employee['salary'][1:]}"
-        if employee['age'] < 30:
-            employee['salary'] = f"{float(employee['salary'][:-1]) * 1.10:.2f}€"
+        rm_dot = employee['salary'][1:].replace(',', '').strip('$')
+        salary_str = rm_dot.replace(',', '.')
+        employee['salary'] = f"{float(salary_str) * 1.10:.2f}€"
 
 def save_dataframe_to_excel(df, excel_name):
     with pd.ExcelWriter(excel_name, engine="openpyxl") as writer:
