@@ -11,7 +11,7 @@ def load_employees_data(file_path):
 def filter_employees(employees_data, project_name):
     valid_employees = []
     for employee in employees_data:
-        if employee['proyect'] == project_name:
+        if employee['proyect'] != project_name:
             valid_employees.append(employee)
     return valid_employees
 
